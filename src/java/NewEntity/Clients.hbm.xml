@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.12.2016 0:32:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="NewEntity.Clients" table="clients" catalog="law_firm_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="surname" type="string">
+            <column name="Surname" length="100" />
+        </property>
+        <property name="name" type="string">
+            <column name="Name" length="125" not-null="true" />
+        </property>
+        <property name="patronymic" type="string">
+            <column name="Patronymic" length="120" not-null="true" />
+        </property>
+        <property name="birthdayDate" type="timestamp">
+            <column name="BirthdayDate" length="19" />
+        </property>
+        <property name="passportSeries" type="string">
+            <column name="PassportSeries" length="2" not-null="true" />
+        </property>
+        <property name="passportCode" type="int">
+            <column name="PassportCode" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" />
+        </property>
+        <property name="street" type="string">
+            <column name="Street" />
+        </property>
+        <property name="appartamentNumber" type="string">
+            <column name="AppartamentNumber" />
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="PhoneNumber" not-null="true" unique="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="50" />
+        </property>
+        <set name="businesseses" table="businesses" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ClientCode" not-null="true" />
+            </key>
+            <one-to-many class="NewEntity.Businesses" />
+        </set>
+    </class>
+</hibernate-mapping>

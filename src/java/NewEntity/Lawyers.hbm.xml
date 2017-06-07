@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.12.2016 0:32:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="NewEntity.Lawyers" table="lawyers" catalog="law_firm_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="surname" type="string">
+            <column name="Surname" length="50" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="Name" length="50" not-null="true" />
+        </property>
+        <property name="patronymic" type="string">
+            <column name="Patronymic" not-null="true" />
+        </property>
+        <property name="passportSeries" type="string">
+            <column name="PassportSeries" length="2" not-null="true" />
+        </property>
+        <property name="passportCode" type="string">
+            <column name="PassportCode" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="Email" length="50" not-null="true" />
+        </property>
+        <set name="businesseses" table="businesses" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="LawyerCode" not-null="true" />
+            </key>
+            <one-to-many class="NewEntity.Businesses" />
+        </set>
+    </class>
+</hibernate-mapping>

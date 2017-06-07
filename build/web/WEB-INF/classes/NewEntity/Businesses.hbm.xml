@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24.12.2016 0:32:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="NewEntity.Businesses" table="businesses" catalog="law_firm_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="clients" class="NewEntity.Clients" fetch="select">
+            <column name="ClientCode" not-null="true" />
+        </many-to-one>
+        <many-to-one name="lawyers" class="NewEntity.Lawyers" fetch="select">
+            <column name="LawyerCode" not-null="true" />
+        </many-to-one>
+        <many-to-one name="services" class="NewEntity.Services" fetch="select">
+            <column name="ServiceCode" not-null="true" />
+        </many-to-one>
+        <property name="documentsCode" type="java.lang.Integer">
+            <column name="DocumentsCode" />
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="StartDate" length="19" not-null="true" />
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="EndDate" length="19" />
+        </property>
+        <property name="judgement" type="string">
+            <column name="Judgement" />
+        </property>
+        <set name="consumptionses" table="consumptions" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="BusinessID" />
+            </key>
+            <one-to-many class="NewEntity.Consumptions" />
+        </set>
+        <set name="documentses" table="documents" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="BusinessID" not-null="true" />
+            </key>
+            <one-to-many class="NewEntity.Documents" />
+        </set>
+        <set name="incomeses" table="incomes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="BusinessID" />
+            </key>
+            <one-to-many class="NewEntity.Incomes" />
+        </set>
+    </class>
+</hibernate-mapping>
